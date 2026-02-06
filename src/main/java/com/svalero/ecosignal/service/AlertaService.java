@@ -36,5 +36,10 @@ public class AlertaService {
         oldAlerta.setFechaHora(alerta.getFechaHora());
         return alertaRepository.save(oldAlerta);
     }
+    public Alerta findById(long id) throws AlertaNotFoundException{
+        return alertaRepository.findById(id)
+                .orElseThrow(AlertaNotFoundException::new);
+
+    }
 }
 

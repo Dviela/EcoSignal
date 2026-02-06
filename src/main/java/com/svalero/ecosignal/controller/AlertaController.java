@@ -23,6 +23,11 @@ public class AlertaController {
         List<Alerta> allAlerta = alertaService.findAll();
         return allAlerta;
     }
+    @GetMapping("/alerta/{id}")
+    public ResponseEntity<Alerta> get(@PathVariable long id) throws AlertaNotFoundException{
+        Alerta alerta = alertaService.findById(id);
+        return ResponseEntity.ok(alerta);
+    }
     @PostMapping("/alerta")
     public void addAlerta(@RequestBody Alerta alerta){
         alertaService.add(alerta);
