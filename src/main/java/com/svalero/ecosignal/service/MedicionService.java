@@ -37,5 +37,10 @@ public class MedicionService {
         oldMedicion.setFechaHora(medicion.getFechaHora());
         return medicionRepository.save(oldMedicion);
     }
+    public Medicion findById(long id) throws MedicionNotFoundException{
+        return medicionRepository.findById(id)
+                .orElseThrow(MedicionNotFoundException::new);
+
+    }
 
 }

@@ -19,6 +19,12 @@ public class MedicionController {
             List<Medicion> allMedicion = medicionService.findAll();
         return allMedicion;
         }
+       @GetMapping("/medicion/{id}")
+       public ResponseEntity<Medicion> get(@PathVariable long id) throws MedicionNotFoundException{
+            Medicion medicion = medicionService.findById(id);
+            return ResponseEntity.ok(medicion);
+        }
+
         @PostMapping("/medicion")
         public void addMedicion(@RequestBody Medicion medicion){
             medicionService.add(medicion);
