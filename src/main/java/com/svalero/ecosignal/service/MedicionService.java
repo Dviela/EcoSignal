@@ -7,6 +7,8 @@ import com.svalero.ecosignal.repository.MedicionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MedicionService {
 
@@ -16,10 +18,24 @@ public class MedicionService {
     public Medicion add(Medicion medicion) {
         return medicionRepository.save(medicion);
     }
-    public void delete(long id) throws AlertaNotFoundException, MedicionNotFoundException {
+    public void delete(long id) throws MedicionNotFoundException {
         Medicion medicion = medicionRepository.findById(id)
                 .orElseThrow(MedicionNotFoundException::new);
         medicionRepository.delete(medicion);
+    }
+
+    public List<Medicion> findAll(){
+        List<Medicion> allMedicion = medicionRepository.findAll();
+        return allMedicion;
+    }
+    public Medicion modify(long id, Medicion medicion) throws MedicionNotFoundException{
+        Medicion oldMedicion = medicionRepository.findById(id)
+                .orElseThrow(MedicionNotFoundException::new);
+        oldMedicion.setTipo(medicion.getTipo());
+        oldMedicion.setValor(medicion.getValor());
+        oldMedicion.setUnidad(medicion.getUnidad());
+        oldMedicion.setFechaHora(medicion.getFechaHora());
+        return medicionRepository.save(oldMedicion);
     }
 
 }

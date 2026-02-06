@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class Alerta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Column
     private String titulo;
     @Column
