@@ -1,0 +1,73 @@
+openapi: 3.0.3
+info:
+  title: API Calidad Ambiental
+  version: 1.0.0
+
+components:
+  schemas:
+    Medicion:
+      type: object
+      required:
+        - id
+        - tipo
+        - valor
+        - unidad
+        - fechaHora
+        - valida
+      properties:
+        id:
+          type: integer
+          format: int64
+        tipo:
+          type: string
+          enum: ["PM2_5", "CO2", "RUIDO", "TEMP"]
+        valor:
+          type: number
+          format: double
+        unidad:
+          type: string
+          enum: ["µg/m³", "ppm", "dB", "°C"]
+        fechaHora:
+          type: string
+          format: date-time
+        valida:
+          type: boolean
+        lat:
+          type: number
+          format: double
+          nullable: true
+        lon:
+          type: number
+          format: double
+          nullable: true
+
+    Alerta:
+      type: object
+      required:
+        - id
+        - titulo
+        - descripcion
+        - nivel
+        - umbral
+        - fechaHora
+        - resuelta
+      properties:
+        id:
+          type: integer
+          format: int64
+        titulo:
+          type: string
+        descripcion:
+          type: string
+        nivel:
+          type: integer
+          minimum: 1
+          maximum: 5
+        umbral:
+          type: number
+          format: double
+        fechaHora:
+          type: string
+          format: date-time
+        resuelta:
+          type: boolean
