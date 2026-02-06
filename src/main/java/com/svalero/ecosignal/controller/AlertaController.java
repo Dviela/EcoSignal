@@ -8,6 +8,7 @@ import com.svalero.ecosignal.service.AlertaService;
 import com.svalero.ecosignal.service.MedicionService;
 import org.hibernate.engine.jdbc.dialect.spi.DatabaseMetaDataDialectResolutionInfoAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,8 +30,9 @@ public class AlertaController {
         return ResponseEntity.ok(alerta);
     }
     @PostMapping("/alerta")
-    public void addAlerta(@RequestBody Alerta alerta){
-        alertaService.add(alerta);
+    public ResponseEntity<Alerta> addAlerta(@RequestBody Alerta alerta){
+        Alerta nueva = alertaService.add(alerta);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nueva);   //201 created
     }
     @PutMapping("/alerta/{id}")
     public ResponseEntity<Alerta> modifyAlerta(@PathVariable long id, @RequestBody Alerta alerta) throws AlertaNotFoundException{
